@@ -3,37 +3,46 @@
 			Table payroll
 */
 
-CREATE TABLE payroll_annual_growth AS
+CREATE TABLE avg_wages_annual_growth AS
 WITH avg_payroll AS (
   SELECT payroll_year
-        ,industry_branch_code 
-        ,name
         ,AVG(value) as average_payroll
   FROM czechia_payroll
   INNER JOIN czechia_payroll_industry_branch
       ON czechia_payroll.industry_branch_code = czechia_payroll_industry_branch.code
-  GROUP BY industry_branch_code, payroll_year
-),
-avg_yearly_payroll AS (
-  SELECT payroll_year
-        ,AVG(value) as avg_yearly_payroll
-  FROM czechia_payroll
   GROUP BY payroll_year
 )
-SELECT avg_payroll.payroll_year as year
-      ,avg_payroll.industry_branch_code 
-      ,avg_payroll.name
-      ,avg_payroll.average_payroll
-      ,((avg_payroll.average_payroll - LAG(avg_payroll.average_payroll) OVER (PARTITION BY avg_payroll.industry_branch_code ORDER BY avg_payroll.payroll_year)) / LAG(avg_payroll.average_payroll) OVER (PARTITION BY avg_payroll.industry_branch_code ORDER BY avg_payroll.payroll_year)) * 100 as payroll_growth
-      ,avg_yearly_payroll.avg_yearly_payroll
+SELECT payroll_year as year
+      ,average_payroll
+      ,((average_payroll - LAG(average_payroll) OVER (ORDER BY payroll_year)) / LAG(average_payroll) OVER (ORDER BY payroll_year)) * 100 as avg_payroll_growth
 FROM avg_payroll
-INNER JOIN avg_yearly_payroll
-      ON avg_payroll.payroll_year = avg_yearly_payroll.payroll_year
-ORDER BY year, industry_branch_code;
-
+ORDER BY year;
 
 SELECT *
-FROM payroll_annual_growth;
+FROM avg_wages_annual_growth;
+
+
+CREATE TABLE avg_wages_annual_growth_by_category AS
+WITH avg_payroll AS (
+  SELECT payroll_year
+        ,industry_branch_code 
+        ,name
+        ,AVG(value) as category_avg_payroll
+  FROM czechia_payroll
+  INNER JOIN czechia_payroll_industry_branch
+      ON czechia_payroll.industry_branch_code = czechia_payroll_industry_branch.code
+  GROUP BY industry_branch_code, payroll_year
+)
+SELECT payroll_year as year
+      ,industry_branch_code 
+      ,name
+      ,category_avg_payroll
+      ,((category_avg_payroll - LAG(category_avg_payroll) OVER (PARTITION BY industry_branch_code ORDER BY payroll_year)) / LAG(category_avg_payroll) OVER (PARTITION BY industry_branch_code ORDER BY payroll_year)) * 100 as category_payroll_growth
+FROM avg_payroll
+ORDER BY year, industry_branch_code;
+
+SELECT *
+FROM avg_wages_annual_growth_by_category;
 
 -- DROP TABLE payroll_annual_growth
 -- ------------------------------------------------------------------------------------------------------------------------------------  
@@ -43,6 +52,25 @@ FROM payroll_annual_growth;
 */
 
 CREATE TABLE prices_annual_growth AS
+WITH avg_price AS (
+  SELECT YEAR(date_from) as year
+        ,AVG(value) as average_price
+  FROM czechia_price
+  WHERE YEAR(date_from) BETWEEN 2006 AND 2018 AND YEAR(date_to) BETWEEN 2006 AND 2018
+  GROUP BY YEAR(date_from)
+)
+SELECT year
+      ,average_price
+      ,((average_price - LAG(average_price) OVER (ORDER BY year)) / LAG(average_price) OVER (ORDER BY year)) * 100 as price_growth
+FROM avg_price
+ORDER BY year
+
+  SELECT *
+  FROM prices_annual_growth;
+
+ 
+ 
+CREATE TABLE prices_annual_growth_by_category AS
 WITH avg_price AS (
   SELECT YEAR(date_from) as year
       ,category_code
@@ -66,8 +94,9 @@ ORDER BY year, category_code;
 
 
 SELECT *
-FROM prices_annual_growth;
+FROM prices_annual_growth_by_category;
 
+-- DROP TABLE prices_annual_growth;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------  
 
