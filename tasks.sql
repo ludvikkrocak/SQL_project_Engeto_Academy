@@ -103,12 +103,12 @@ FROM (
   INNER JOIN avg_wages_annual_growth
   ON prices_annual_growth.year = avg_wages_annual_growth.year
 ) subquery
-WHERE growth_difference > 10;
+-- WHERE growth_difference > 10;
 
 SELECT *
 FROM difference_annual_price_wages_growth;
 
--- DROP TABLE annual_price_wages_growth;
+DROP TABLE difference_annual_price_wages_growth;
 
 /*
 			5) Does the level of GDP affect changes in wages and food prices? In other words, if the GDP increases significantly in one year, will it be reflected in food prices or wages in the same or following year with a more significant increase?
@@ -118,6 +118,7 @@ CREATE TABLE prices_wages_gdp_grow AS
 SELECT annual_price_wages_growth.year
       ,price_growth
       ,avg_payroll_growth
+      ,gdp
       ,gdp_growth
 FROM annual_price_wages_growth
 INNER JOIN cz_gdp_annual_growth
@@ -126,6 +127,8 @@ GROUP BY year;
 
 SELECT *
 FROM prices_wages_gdp_grow;
+
+-- DROP TABLE prices_wages_gdp_grow
 
 SELECT year
       ,price_growth

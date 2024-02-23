@@ -140,7 +140,8 @@ OR country LIKE '%spain%'
 OR country LIKE '%croatia%'
 OR country LIKE '%sweden%'
 OR country LIKE '%bulgaria%'
-OR country LIKE '%latvia%')
+OR country LIKE '%latvia%'
+OR country LIKE '%france%')
 AND year BETWEEN 2006 AND 2018;
 
 SELECT *
