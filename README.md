@@ -152,6 +152,6 @@ Roky následující:
 
 V roce 2008 rostly ceny potravin 6.40%, růst mezd 7.16%.
 
-V roce 2016 a došlo k poklesu cen potravin o -1.12%, mzdy vzrostly o 8.77%.
+V roce 2016 a došlo k poklesu cen potravin o 1.12%, mzdy vzrostly o 8.77%.
 
 V roce 2018 rostly ceny potravin o 1.94%, mzdy vzrostly o 12.75%.
