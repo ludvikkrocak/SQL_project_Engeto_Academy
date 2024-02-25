@@ -89,5 +89,29 @@ SELECT year
       ,avg_payroll_growth
       ,gdp_growth
 FROM prices_payroll_gdp_grow
-WHERE gdp_growth > (SELECT AVG(gdp_growth) + STDDEV(gdp_growth) FROM prices_payroll_gdp_grow)
+WHERE gdp_growth > (SELECT AVG(gdp_growth) + STDDEV(gdp_growth)
+FROM prices_payroll_gdp_grow)
 ORDER BY year;
+
+SELECT p.year
+      ,p.price_growth
+      ,p.avg_payroll_growth
+      ,p.gdp_growth
+      ,p.next_year
+      ,o.price_growth AS next_price_growth
+      ,o.avg_payroll_growth AS next_avg_payroll_growth
+FROM (
+    SELECT year
+          ,price_growth
+          ,avg_payroll_growth
+          ,gdp_growth
+          ,year + 1 AS next_year
+    FROM prices_payroll_gdp_grow
+) AS p
+INNER JOIN annual_price_payroll_growth AS o ON p.next_year = o.year
+WHERE p.gdp_growth > (SELECT AVG(gdp_growth) + STDDEV(gdp_growth)
+FROM prices_payroll_gdp_grow
+)
+ORDER BY p.year;
+
+
