@@ -19,7 +19,9 @@ Jako dodatečný materiál jsem připravil i tabulku s HDP, GINI koeficientem a 
 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na 6)cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
 
 Dále jsem připravil dvě tabulky, ze kterých se požadovaná data dají získat.
+
 t_ludvik_krocak_project_SQL_primary_final
+
 t_ludvik_krocak_project_SQL_secondary_final
 
 ## ANALÝZA
