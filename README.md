@@ -49,6 +49,7 @@ czechia_district – Číselník okresů České republiky dle normy LAU.
 Dodatečné tabulky:
 
 countries - Všemožné informace o zemích na světě, například hlavní město, měna, národní jídlo nebo průměrná výška populace.
+
 economies - HDP, GINI, daňová zátěž, atd. pro daný stát a rok.
 
 ### Vytvořené tabulky
