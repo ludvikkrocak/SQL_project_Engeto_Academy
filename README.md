@@ -138,11 +138,17 @@ V rámci analýzy jsem identifikoval 2 roky, kdy byl nárůst cen potravin o 10%
 ### 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
 
 V dostupných datech jsem identifikoval 3 roky, kdy růst HDP vyšší než průměrný růst HDP + 1 standardní odchylka, což může signalizovat výraznější růst HDP. Růst HDP má částečný vliv na ceny potravin a velikost mezd, ale tyto hodnoty jsou ovlivněny i mnoha dalšími faktory (např. inflace, nezaměstanost, nabídka a poptávka a další...).
+
 V roce 2007 byl růst HDP 5.57%, růst cen potravin 6.34%, růst mezd 6.15%.
+
 V roce 2015 HDP vzrostlo o 5.39% a došlo k poklesu cen potravin o 0.56%, mzdy vzrostly o 0.69%.
+
 V roce 2017 HDP vzrostlo o 5.17% a ceny potravin vzrostly o 9.98%, mzdy klesly o -1.63%.
 
 Roky následující:
+
 V roce 2008 rostly ceny potravin 6.40%, růst mezd 7.16%.
+
 V roce 2016 a došlo k poklesu cen potravin o -1.12%, mzdy vzrostly o 8.77%.
+
 V roce 2018 rostly ceny potravin o 1.94%, mzdy vzrostly o 12.75%.
