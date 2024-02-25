@@ -3,7 +3,7 @@
 			Table payroll
 */
 
-CREATE TABLE avg_wages_annual_growth AS
+CREATE TABLE avg_payroll_annual_growth AS
 WITH avg_payroll AS (
   SELECT payroll_year
         ,AVG(value) as average_payroll
@@ -19,10 +19,10 @@ FROM avg_payroll
 ORDER BY year;
 
 SELECT *
-FROM avg_wages_annual_growth;
+FROM avg_payroll_annual_growth;
 
 
-CREATE TABLE avg_wages_annual_growth_by_category AS
+CREATE TABLE avg_payroll_annual_growth_by_category AS
 WITH avg_payroll AS (
   SELECT payroll_year
         ,industry_branch_code 
@@ -42,7 +42,7 @@ FROM avg_payroll
 ORDER BY year, industry_branch_code;
 
 SELECT *
-FROM avg_wages_annual_growth_by_category;
+FROM avg_payroll_annual_growth_by_category;
 
 -- DROP TABLE payroll_annual_growth
 -- ------------------------------------------------------------------------------------------------------------------------------------  
@@ -100,6 +100,39 @@ FROM prices_annual_growth_by_category;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------  
 
+CREATE TABLE annual_price_payroll_growth AS
+SELECT prices_annual_growth.year
+      ,average_price
+      ,price_growth
+      ,average_payroll
+      ,avg_payroll_growth
+      ,(price_growth - avg_payroll_growth) as growth_difference
+FROM prices_annual_growth
+INNER JOIN avg_payroll_annual_growth
+ON prices_annual_growth.year = avg_payroll_annual_growth.year
+GROUP BY year;
+
+SELECT *
+FROM annual_price_payroll_growth;
+
+-- ------------------------------------------------------------------------------------------------------------------------------------  
+
+CREATE TABLE prices_payroll_gdp_grow AS
+SELECT annual_price_payroll_growth.year
+      ,price_growth
+      ,avg_payroll_growth
+      ,gdp
+      ,gdp_growth
+FROM annual_price_payroll_growth
+INNER JOIN cz_gdp_annual_growth
+ON annual_price_payroll_growth.year = cz_gdp_annual_growth.year
+GROUP BY year;
+
+SELECT *
+FROM prices_payroll_gdp_grow;
+
+-- ------------------------------------------------------------------------------------------------------------------------------------  
+
 /*
 			Table GDP Czech republic
 */
@@ -115,6 +148,7 @@ AND year BETWEEN 2006 AND 2018;
 
 SELECT *
 FROM cz_gdp_annual_growth;
+
 
 -- ------------------------------------------------------------------------------------------------------------------------------------  
    
