@@ -136,12 +136,12 @@ V roce 2018 průměrná mzda činila 29 803 Kč a bylo možné si za tuto mzdu k
 
 Na základě meziročního porovnání průměrných cen jednotlivých kategorií potravin jsem zjistil, že nejpomaleji zdražuje (přesněji - nejrychleji zlevňuje) za sledované období v letech 2006 až 2018 cukr krystalový. Průměrná cena cukru mezi těmito roky klesla o 6 Kč z 21,8 Kč/kg na 15,75 Kč/kg. Průměrná cena cukru krystal klesla o 27,5 % a má tedy nejmenší percentuální nárůst mezi kategoriemi potravin v dostupných datech.
 
-Mezi potravinami, které zdražovaly mají nejmenší meziroční percentuální nárůst ceny banány žluté, které za sledované období zdražily o 2 Kč z průměrné ceny 27,3 Kč/kg v roce 2006 na 29,3 Kč/kg v roce 2018, což je změna o 7,38%.
+Mezi potravinami, které zdražovaly mají nejmenší meziroční percentuální nárůst ceny banány žluté, které za sledované období zdražily o 2 Kč z průměrné ceny 27,3 Kč/kg v roce 2006 na 29,3 Kč/kg v roce 2018, což je změna o 7,38 %.
 
 
 ### 4) Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 
-V rámci analýzy jsem identifikoval 2 roky, kdy byl meziroční nárůst cen potravin o 10% vyšší než růst mezd. Konkrétně v roce 2013 ceny potravin vzrostly 5.55%, zatímco mzdy poklesly o 6.71% a v roce 2018 ceny potravin vzrostly o 9,98 %, mzdy poklesly o 1,63 %.
+V rámci analýzy jsem identifikoval 2 roky, kdy byl meziroční nárůst cen potravin o 10 % vyšší než růst mezd. Konkrétně v roce 2013 ceny potravin vzrostly 5,55 %, mzdy poklesly o 6,71 % a v roce 2018 ceny potravin vzrostly o 9,98 %, mzdy poklesly o 1,63 %.
 
 ### 5) Má výška HDP vliv na změny ve mzdách a cenách potravin? Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
 
