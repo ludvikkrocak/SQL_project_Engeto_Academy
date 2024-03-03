@@ -1,35 +1,34 @@
 
-
 /*
 			1) Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají?
 */
 
 
 SELECT *
-FROM avg_payroll_annual_growth_by_category;
+FROM tbl_avg_payroll_annual_growth_by_category;
 
 
 /*
 			2) Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
 */
 
-CREATE TABLE milk_bread_amount AS
+CREATE VIEW milk_bread_amount AS
 SELECT milk_bread_prices.year
 	  ,milk_bread_prices.name
 	  ,milk_bread_prices.average_price
 	  ,milk_bread_prices.price_unit
-	  ,avg_payroll_annual_growth.average_payroll
-	  ,avg_payroll_annual_growth.average_payroll / milk_bread_prices.average_price AS amount_per_payroll
+	  ,apag.average_payroll
+	  ,apag.average_payroll / milk_bread_prices.average_price AS amount_per_payroll
 FROM (
     SELECT year
 	  	  ,name
 	  	  ,average_price
 	  	  ,price_unit
-    FROM prices_annual_growth_by_category
+    FROM tbl_prices_annual_growth_by_category
     WHERE name LIKE '%chleb%' OR name LIKE '%mleko%'
 ) AS milk_bread_prices
-INNER JOIN avg_payroll_annual_growth
-      ON milk_bread_prices.year = avg_payroll_annual_growth.year
+INNER JOIN tbl_avg_payroll_annual_growth apag
+      ON milk_bread_prices.year = apag.year
 GROUP BY name, year;
 
 SELECT *
@@ -46,7 +45,7 @@ WITH price_2006 AS (
 		category_code 
 		,name
 		,average_price AS price_2006
-	FROM prices_annual_growth_by_category
+	FROM tbl_prices_annual_growth_by_category
 	WHERE year = '2006'
 ),
 price_2018 AS (
@@ -54,7 +53,7 @@ price_2018 AS (
 		category_code
 		,name
 		,average_price AS price_2018
-	FROM prices_annual_growth_by_category
+	FROM tbl_prices_annual_growth_by_category
 	WHERE year = '2018'
 )
 SELECT 
@@ -75,8 +74,8 @@ ORDER BY percentage_change;
 */
 
 SELECT *
-FROM annual_price_payroll_growth
-WHERE growth_difference > 10;
+FROM tbl_annual_price_payroll_growth
+WHERE growth_difference_prc_prl > 10;
 
 
 /*
@@ -88,9 +87,9 @@ SELECT year
       ,price_growth
       ,avg_payroll_growth
       ,gdp_growth
-FROM prices_payroll_gdp_grow
+FROM tbl_prices_payroll_gdp_grow
 WHERE gdp_growth > (SELECT AVG(gdp_growth) + STDDEV(gdp_growth)
-FROM prices_payroll_gdp_grow)
+FROM tbl_prices_payroll_gdp_grow)
 ORDER BY year;
 
 SELECT p.year
@@ -106,11 +105,11 @@ FROM (
           ,avg_payroll_growth
           ,gdp_growth
           ,year + 1 AS next_year
-    FROM prices_payroll_gdp_grow
+    FROM tbl_prices_payroll_gdp_grow
 ) AS p
-INNER JOIN annual_price_payroll_growth AS o ON p.next_year = o.year
+INNER JOIN tbl_annual_price_payroll_growth o ON p.next_year = o.year
 WHERE p.gdp_growth > (SELECT AVG(gdp_growth) + STDDEV(gdp_growth)
-FROM prices_payroll_gdp_grow
+FROM tbl_prices_payroll_gdp_grow
 )
 ORDER BY p.year;
 
