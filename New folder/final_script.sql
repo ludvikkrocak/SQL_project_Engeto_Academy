@@ -47,3 +47,6 @@ FROM tbl_europe_economies
 
 SELECT *
 FROM t_ludvik_krocak_project_SQL_secondary_final;
+
+
+DROP TABLE t_ludvik_krocak_project_SQL_secondary_final
