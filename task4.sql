@@ -1,7 +1,7 @@
 
 -- Task 4
 
-CREATE VIEW tbl_payroll_price_annual_growth AS
+CREATE VIEW tbl_price_payroll_annual_growth AS
 WITH payroll AS (
 	SELECT 
 		subject
@@ -30,8 +30,8 @@ SELECT
     price.year
     ,payroll.avg_payroll_growth
     ,price.avg_price_growth
-    ,(avg_payroll_growth - avg_price_growth) AS payroll_price_difference
+    ,(avg_price_growth - avg_payroll_growth) AS price_payroll_difference
 FROM price
 JOIN payroll ON price.year = payroll.year;
 
-SELECT * FROM tbl_payroll_price_annual_growth;
+SELECT * FROM tbl_price_payroll_annual_growth;
