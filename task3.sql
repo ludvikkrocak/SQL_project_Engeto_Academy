@@ -21,3 +21,19 @@ SELECT
 FROM yearly_growth
 GROUP BY category_code
 ORDER BY avg_of_annual_increases_by_category;
+
+SELECT 
+    year,
+    subject,
+    category_name,
+    average_value_by_category,
+ 			((average_value_by_category - LAG(average_value_by_category) 
+				OVER (PARTITION BY category_code ORDER BY year)) / LAG(average_value_by_category) 
+					OVER (PARTITION BY category_code ORDER BY year)) * 100 as avg_annual_price_growth_by_category
+FROM t_ludvik_krocak_project_sql_primary_final
+WHERE (year = '2006' OR year = '2018') AND subject = 'price';
+
+
+SELECT * FROM t_ludvik_krocak_project_sql_primary_final tlkpspf 
+
+

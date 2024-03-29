@@ -34,4 +34,5 @@ SELECT
 FROM price
 JOIN payroll ON price.year = payroll.year;
 
-SELECT * FROM tbl_price_payroll_annual_growth;
+SELECT * FROM tbl_pric
+e_payroll_annual_growth;
