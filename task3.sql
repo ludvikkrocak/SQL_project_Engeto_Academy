@@ -9,7 +9,7 @@ WITH yearly_growth AS (
 			,category_name
 			,((average_value_by_category - LAG(average_value_by_category) 
 				OVER (PARTITION BY category_code ORDER BY year)) / LAG(average_value_by_category) 
-					OVER (PARTITION BY category_code ORDER BY year)) * 100 as avg_annual_price_growth_by_category
+					OVER (PARTITION BY category_code ORDER BY year)) * 100 AS avg_annual_price_growth_by_category
 	FROM t_ludvik_krocak_project_SQL_primary_final
 	WHERE subject = 'price'
 )
@@ -17,23 +17,7 @@ SELECT
 		subject
 		,category_code
 		,category_name
-		,AVG(avg_annual_price_growth_by_category) as avg_of_annual_increases_by_category
+		,AVG(avg_annual_price_growth_by_category) AS avg_of_annual_increases_by_category
 FROM yearly_growth
 GROUP BY category_code
 ORDER BY avg_of_annual_increases_by_category;
-
-SELECT 
-    year,
-    subject,
-    category_name,
-    average_value_by_category,
- 			((average_value_by_category - LAG(average_value_by_category) 
-				OVER (PARTITION BY category_code ORDER BY year)) / LAG(average_value_by_category) 
-					OVER (PARTITION BY category_code ORDER BY year)) * 100 as avg_annual_price_growth_by_category
-FROM t_ludvik_krocak_project_sql_primary_final
-WHERE (year = '2006' OR year = '2018') AND subject = 'price';
-
-
-SELECT * FROM t_ludvik_krocak_project_sql_primary_final tlkpspf 
-
-

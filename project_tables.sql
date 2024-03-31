@@ -1,4 +1,5 @@
 
+-- tables payroll
 CREATE VIEW tbl_payroll_by_category AS
 SELECT
 		'payroll' AS subject
@@ -9,6 +10,7 @@ SELECT
 FROM czechia_payroll
 INNER JOIN czechia_payroll_industry_branch
       ON czechia_payroll.industry_branch_code = czechia_payroll_industry_branch.code
+WHERE value_type_code = '5958'
 GROUP BY industry_branch_code, year, name
 ORDER BY year;
 
@@ -17,15 +19,11 @@ SELECT
 		payroll_year AS year
 		,AVG(value) AS average_value
 FROM czechia_payroll
+WHERE value_type_code = '5958'
 GROUP BY year
 ORDER BY year;
 
--- ---------------------------------------------------------------------------------------------------
-SELECT * FROM tbl_payroll_by_category;
-
-SELECT * FROM tbl_price_by_category
-
--- ---------------------------------------------------------------------------------------------------
+-- tables prices
 
 CREATE VIEW tbl_price_by_category AS
 SELECT
@@ -50,7 +48,7 @@ WHERE YEAR(date_from) BETWEEN 2006 AND 2018 AND YEAR(date_to) BETWEEN 2006 AND 2
 GROUP BY year
 ORDER BY year;
 
--- ------------------------------------------------------------------------------------
+-- table GDP
 
 CREATE VIEW tbl_gdp AS
 SELECT
@@ -61,8 +59,7 @@ FROM economies e
 WHERE country LIKE '%czech%' AND year BETWEEN 2006 AND 2018
 ORDER BY year;
 
-
--- ----------------------------------
+-- final tables
 
 CREATE TABLE t_ludvik_krocak_project_SQL_primary_final
 SELECT 
@@ -95,8 +92,6 @@ INNER JOIN tbl_gdp tg
 LEFT JOIN tbl_price 
     ON prc.year = tbl_price.year;
 
-SELECT * FROM t_ludvik_krocak_project_SQL_primary_final;
-
 
 CREATE TABLE t_ludvik_krocak_project_SQL_secondary_final AS
 SELECT
@@ -118,6 +113,8 @@ WHERE
     )
     AND e.year BETWEEN 2006 AND 2018;
 
+
+SELECT * FROM t_ludvik_krocak_project_SQL_primary_final;  
 
 SELECT *
 FROM t_ludvik_krocak_project_SQL_secondary_final
